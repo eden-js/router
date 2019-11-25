@@ -4,7 +4,7 @@
 const qs      = require('qs');
 const Bar     = require('nanobar');
 const uuid    = require('uuid');
-const store   = require('default/public/js/store');
+const store   = require('core/public/js/store');
 const Events  = require('events');
 const socket  = require('socket/public/js/bootstrap');
 const history = require('history').createBrowserHistory;
@@ -22,6 +22,8 @@ class EdenRouter extends Events {
   constructor(...args) {
     // run super
     super(...args);
+
+    console.log('SUP');
 
     // set mount
     this.__bar = false;
