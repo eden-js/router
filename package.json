@@ -1,7 +1,7 @@
 {
   "name": "@edenjs/router",
   "description": "",
-  "version": "2.1.6",
+  "version": "2.2.0",
   "dependencies": {
     "history": "^4.7.2",
     "nanobar": "^0.4.2"
