@@ -23,8 +23,6 @@ class EdenRouter extends Events {
     // run super
     super(...args);
 
-    console.log('SUP');
-
     // set mount
     this.__bar = false;
     this.__states = new Map();
@@ -317,7 +315,6 @@ class EdenRouter extends Events {
       // return time
       return (new Date()).getTime() - time;
     } catch (e) {
-      console.log(e);
       // Log error
       setTimeout(() => {
         // Complete bar after 1 second
@@ -665,7 +662,7 @@ class EdenRouter extends Events {
    */
   onSubmit(form, e) {
     // return if no form
-    if (!form) return false;
+    if (!form) return;
 
     // get href
     let href = (form.href || '');
@@ -673,10 +670,15 @@ class EdenRouter extends Events {
     // set href
     href = href.indexOf(`https://${store.get('config.domain')}`) === 0 ? href.replace(`https://${store.get('config.domain')}`, '') : href;
 
+    // prevent eden event
+    if (form.getAttribute('data-eden') === 'prevent') {
+      return;
+    }
+
     // Check if actual redirect
     if (href.includes('//') || href.indexOf('#') === 0) {
       // Return
-      return false;
+      return;
     }
 
     // Submit form
@@ -688,9 +690,6 @@ class EdenRouter extends Events {
       e.preventDefault();
       e.stopPropagation();
     }
-
-    // Return true
-    return true;
   }
 }
 
