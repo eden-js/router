@@ -615,7 +615,7 @@ class EdenRouter extends Events {
    */
   onClick(link, e) {
     // return if no form
-    if (!link || (link.getAttribute('href') || '').indexOf('#') === 0) return false;
+    if (!link || !link.getAttribute('href') || (link.getAttribute('href') || '').indexOf('#') === 0) return false;
 
     // check target
     if (link.getAttribute('target') || link.getAttribute('role')) return false;
