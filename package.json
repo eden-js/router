@@ -4,7 +4,8 @@
   "version": "2.2.0",
   "dependencies": {
     "history": "^4.7.2",
-    "nanobar": "^0.4.2"
+    "nanobar": "^0.4.2",
+    "shortid": "^2.2.15"
   },
   "engines": {
     "node": ">= 8.0.0"

@@ -3,7 +3,7 @@
 // Require local dependencies
 const qs      = require('qs');
 const Bar     = require('nanobar');
-const uuid    = require('uuid');
+const uuid    = require('shortid');
 const store   = require('core/public/js/store');
 const Events  = require('events');
 const socket  = require('socket/public/js/bootstrap');
@@ -308,6 +308,7 @@ class EdenRouter extends Events {
         // Load json from url
         this.load(loaded);
       });
+      store.emit('page.render', loaded);
 
       // time end
       console.timeEnd(`${url} via ${socket.connected ? 'socket' : 'fetch'} #${id}`);
