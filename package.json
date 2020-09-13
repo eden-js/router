@@ -3,7 +3,7 @@
   "description": "",
   "version": "2.2.0",
   "dependencies": {
-    "history": "^4.7.2",
+    "history": "^5.0.0",
     "nanobar": "^0.4.2",
     "shortid": "^2.2.15"
   },
