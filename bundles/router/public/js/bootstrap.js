@@ -58,7 +58,8 @@ class EdenRouter extends Events {
     window.addEventListener('load', () => {
       // Get qs
       const id = uuid();
-      const query = (this.history.location.pathname || '').split('?');
+      const { hash } = window.location;
+      const [,query] = (window.location.pathname || '').split('?');
 
       // set state
       this.__states.set(id, {
@@ -70,7 +71,7 @@ class EdenRouter extends Events {
       // Push state
       this.history.replace({
         state    : id,
-        pathname : store.get('mount').url + (query[1] ? `?${query[1]}` : ''),
+        pathname : store.get('mount').url + (query ? `?${query}` : '') + (hash ? `${hash}` : ''),
       });
 
       // Initialize
