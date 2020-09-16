@@ -70,8 +70,11 @@ class EdenRouter extends Events {
 
       // Push state
       this.history.replace({
-        state    : id,
-        pathname : store.get('mount').url + (query[1] ? `?${query[1]}` : '') + (hash ? `${hash}` : ''),
+        hash,
+        search   : (query[1] ? `?${query[1]}` : ''),
+        pathname : store.get('mount.url'),
+      }, {
+        state : id,
       });
 
       // Initialize
@@ -484,13 +487,16 @@ class EdenRouter extends Events {
     if (!state) return;
 
     // Scroll to top
-    if (!state.prevent) window.scrollTo(0, 0);
+    if (!state.prevent && !location.state.prevent) {
+      // scroll to 0
+      window.scrollTo(0, 0);
 
-    // Set progress go
-    this.__bar.go(100);
+      // Set progress go
+      this.__bar.go(100);
+    }
 
     // Check prevent
-    if (state.prevent) return;
+    if (state.prevent || location.state.prevent) return;
 
     // render title
     if (store.get('config').direction === 0) {
