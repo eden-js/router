@@ -3,7 +3,7 @@
   "description": "",
   "version": "2.2.0",
   "dependencies": {
-    "history": "^4.7.2",
+    "history": "^5.0.0",
     "nanobar": "^0.4.2",
     "shortid": "^2.2.15"
   },
@@ -26,10 +26,10 @@
   "homepage": "https://github.com/eden-js/router#readme",
   "devDependencies": {
     "@edenjs/eslint-config-eden": "^2.0.14",
-    "eslint": "^5.13.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.0",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6"
   }
 }
