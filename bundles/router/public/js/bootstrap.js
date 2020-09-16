@@ -59,7 +59,7 @@ class EdenRouter extends Events {
       // Get qs
       const id = uuid();
       const { hash } = window.location;
-      const [,query] = (window.location.pathname || '').split('?');
+      const query = (window.location.pathname || '').split('?');
 
       // set state
       this.__states.set(id, {
@@ -71,7 +71,7 @@ class EdenRouter extends Events {
       // Push state
       this.history.replace({
         state    : id,
-        pathname : store.get('mount').url + (query ? `?${query}` : '') + (hash ? `${hash}` : ''),
+        pathname : store.get('mount').url + (query[1] ? `?${query[1]}` : '') + (hash ? `${hash}` : ''),
       });
 
       // Initialize
@@ -282,12 +282,11 @@ class EdenRouter extends Events {
 
     // Create location
     this.history.push({
-      state    : '',
       pathname : url,
     });
 
     // time end
-    const id   = uuid();
+    const id = uuid();
     const time = (new Date()).getTime();
 
     // time
@@ -351,8 +350,9 @@ class EdenRouter extends Events {
 
     // Push state
     this.history.replace({
-      state    : id,
       pathname : data.mount.url,
+    }, {
+      state : id,
     });
   }
 
@@ -476,9 +476,9 @@ class EdenRouter extends Events {
    *
    * @return {Promise}
    */
-  async render(location) {
+  async render({ location }) {
     // let state
-    const state = location.state ? this.__states.get(location.state) : null;
+    const state = location.state && location.state.state ? this.__states.get(location.state.state) : null;
 
     // check state
     if (!state) return;
