@@ -629,7 +629,7 @@ class EdenRouter extends Events {
     if (link.getAttribute('target') || link.getAttribute('role')) return false;
 
     // get href
-    let href = (link.href || '');
+    let href = (link.getAttribute('href') || '');
 
     // set href
     href = href.indexOf(`https://${store.get('config.domain')}`) === 0 ? href.replace(`https://${store.get('config.domain')}`, '') : href;
