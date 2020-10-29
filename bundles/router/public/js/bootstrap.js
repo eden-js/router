@@ -293,18 +293,33 @@ class EdenRouter extends Events {
     const time = (new Date()).getTime();
 
     // time
-    console.time(`${url} via ${socket.connected ? 'socket' : 'fetch'} #${id}`);
+    console.time(`[${id}] [${url}] route`);
 
     // Run try/catch
     try {
       // loaded
       let loaded = null;
 
+      // time
+      console.time(`[${id}] [${url}] load`);
+
       // await on eden
       await store.hook('page.load', url, loaded, async () => {
+        // time
+        console.time(`[${id}] [${url}] fetch`);
+
         // Load json from url
         loaded = await this.get(url);
+
+        // time
+        console.timeEnd(`[${id}] [${url}] fetch`);
       });
+
+      // time
+      console.timeEnd(`[${id}] [${url}] load`);
+
+      // time
+      console.time(`[${id}] [${url}] render`);
 
       // await on eden
       await store.hook('page.render', loaded, () => {
@@ -314,7 +329,10 @@ class EdenRouter extends Events {
       store.emit('page.render', loaded);
 
       // time end
-      console.timeEnd(`${url} via ${socket.connected ? 'socket' : 'fetch'} #${id}`);
+      console.timeEnd(`[${id}] [${url}] render`);
+
+      // time
+      console.timeEnd(`[${id}] [${url}] route`);
 
       // return time
       return (new Date()).getTime() - time;
