@@ -55,7 +55,7 @@ class EdenRouter extends Events {
     this.update = this.update.bind(this);
 
     // Run on document ready
-    window.addEventListener('load', () => {
+    $(() => {
       // Get qs
       const id = uuid();
       const { hash } = window.location;
