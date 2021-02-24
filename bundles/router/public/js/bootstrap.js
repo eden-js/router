@@ -54,6 +54,9 @@ class EdenRouter extends Events {
     this.submit = this.submit.bind(this);
     this.update = this.update.bind(this);
 
+    // set max listeners
+    this.setMaxListeners(0);
+
     // Run on document ready
     $(() => {
       // Get qs
