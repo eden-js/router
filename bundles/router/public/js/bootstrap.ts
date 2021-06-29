@@ -1,21 +1,18 @@
 /* eslint-disable no-console */
 
 // Require local dependencies
-const qs      = require('qs');
-const Bar     = require('nanobar');
-const uuid    = require('shortid');
-const store   = require('core/public/js/store');
-const Events  = require('events');
-const socket  = require('socket/public/js/bootstrap');
-const history = require('history').createBrowserHistory;
-
-// set built
-let built = null;
+import qs from 'qs';
+import Bar from 'nanobar';
+import uuid from 'shortid';
+import store from 'core/public/js/store';
+import socket from 'socket/public/js/bootstrap';
+import { EventEmitter } from 'events';
+import { createBrowserHistory } from 'history';
 
 /**
  * Build router class
  */
-class EdenRouter extends Events {
+class EdenRouter extends EventEmitter {
   /**
    * Construct router class
    */
@@ -28,7 +25,7 @@ class EdenRouter extends Events {
     this.__states = new Map();
 
     // create history
-    this.history = history();
+    this.history = createBrowserHistory();
 
     // build methods
     this.build = this.build.bind(this);
@@ -723,12 +720,10 @@ class EdenRouter extends Events {
 }
 
 // build eden router
-built = new EdenRouter();
+const builtRouter = new EdenRouter();
 
-/**
- * Export new router function
- *
- * @return {router}
- */
-window.eden.router = built;
-module.exports = built;
+// window
+window.eden.router = builtRouter;
+
+// export
+export default builtRouter;
