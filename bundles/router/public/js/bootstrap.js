@@ -58,7 +58,7 @@ class EdenRouter extends Events {
     this.setMaxListeners(0);
 
     // Run on document ready
-    $(() => {
+    window.addEventListener('load', () => {
       // Get qs
       const id = uuid();
       const { hash } = window.location;
@@ -143,7 +143,7 @@ class EdenRouter extends Events {
 
     // add listners
     document.addEventListener('click', e => this.onClick(extractTarget(e, 'a'), e));
-    jQuery(document).on('submit', e => this.onSubmit(extractTarget(e, 'form'), e));
+    document.addEventListener('submit', e => this.onSubmit(extractTarget(e, 'form'), e));
 
     // On state change
     this.history.listen(this.render);
