@@ -6,8 +6,9 @@ import Bar from 'nanobar';
 import uuid from 'shortid';
 import store from 'core/public/js/store';
 import socket from 'socket/public/js/bootstrap';
+import domready from 'domready';
 import { EventEmitter } from 'events';
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory, createHashHistory } from 'history';
 
 /**
  * Build router class
@@ -23,9 +24,9 @@ class EdenRouter extends EventEmitter {
     // set mount
     this.__bar = false;
     this.__states = new Map();
-
+    
     // create history
-    this.history = createBrowserHistory();
+    this.history = store.electron ? createHashHistory() : createBrowserHistory();
 
     // build methods
     this.build = this.build.bind(this);
@@ -55,7 +56,7 @@ class EdenRouter extends EventEmitter {
     this.setMaxListeners(0);
 
     // Run on document ready
-    window.addEventListener('load', () => {
+    domready(() => {
       // Get qs
       const id = uuid();
       const { hash } = window.location;
@@ -244,7 +245,7 @@ class EdenRouter extends EventEmitter {
     }
 
     // do fetch
-    const res = await fetch(url, request);
+    const res = await fetch(store.electron && !url.includes(store.electron.base) ? `${store.electron.base}${url}` : url, request);
 
     // Load json
     return await res.json();
@@ -421,7 +422,7 @@ class EdenRouter extends EventEmitter {
     });
 
     // Run fetch
-    const res = await fetch(formUrl, formOpts);
+    const res = await fetch(store.electron && !formUrl.includes(store.electron.base) ? `${store.electron.base}${formUrl}` : formUrl, formOpts);
 
     // Run json
     this.load(await res.json());

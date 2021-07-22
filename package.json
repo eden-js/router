@@ -3,6 +3,7 @@
   "description": "",
   "version": "2.2.0",
   "dependencies": {
+    "domready": "^1.0.8",
     "history": "^5.0.0",
     "nanobar": "^0.4.2",
     "shortid": "^2.2.16"
