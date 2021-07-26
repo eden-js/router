@@ -269,8 +269,10 @@ class EdenRouter extends EventEmitter {
     // Progress bar
     this.__bar.go(50);
 
+    console.log('test', url);
+
     // Check route
-    if (url.includes('//') || url.indexOf('#') === 0) {
+    if (url.includes('//') || url.indexOf('#') === 0 || url.indexOf('/#') === 0) {
       // Timeout bar go
       setTimeout(() => {
         // Complete bar after 1 second
