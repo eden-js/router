@@ -269,10 +269,8 @@ class EdenRouter extends EventEmitter {
     // Progress bar
     this.__bar.go(50);
 
-    console.log('test', url);
-
     // Check route
-    if (url.includes('//') || url.indexOf('#') === 0 || url.indexOf('/#') === 0) {
+    if (url.includes('//') || url.indexOf('#') === 0 || url.indexOf('/#') === 0 || url.indexOf('data:') === 0) {
       // Timeout bar go
       setTimeout(() => {
         // Complete bar after 1 second
@@ -657,12 +655,18 @@ class EdenRouter extends EventEmitter {
 
     // Check if actual redirect
     if (href.includes('//') || href.indexOf('#') === 0) {
-      // Return
+      // return false
       return false;
     }
 
     // Check file
     if (href.split('/').pop().split('.').length > 1) {
+      // return false
+      return false;
+    }
+
+    // check data url
+    if (href.indexOf('data:') === 0) {
       // return false
       return false;
     }
